@@ -1,0 +1,212 @@
+:root{
+  --ink:#101713;
+  --soft:#66766b;
+  --cream:#f3eadb;
+  --paper:#fff9ed;
+  --deep:#06120c;
+  --forest:#102d1e;
+  --green:#193d2b;
+  --moss:#9ab664;
+  --gold:#d9a554;
+  --rust:#b8663d;
+  --line:rgba(255,255,255,.16);
+  --dark-line:rgba(16,23,19,.14);
+  --shadow:0 32px 90px rgba(0,0,0,.28);
+}
+
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:var(--ink);
+  background:var(--cream);
+  line-height:1.5;
+  overflow-x:hidden;
+}
+img{display:block;max-width:100%}
+a{color:inherit;text-decoration:none}
+
+.grain{
+  position:fixed;inset:0;z-index:100;pointer-events:none;opacity:.12;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.55'/%3E%3C/svg%3E");
+}
+.cursor-glow{
+  position:fixed;width:360px;height:360px;border-radius:999px;z-index:0;pointer-events:none;
+  background:radial-gradient(circle,rgba(217,165,84,.18),transparent 68%);
+  transform:translate(-50%,-50%);
+  opacity:.75;
+}
+.scroll-progress{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--gold),var(--moss));z-index:200}
+
+.nav{
+  position:fixed;inset:0 0 auto 0;z-index:80;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px clamp(18px,4vw,58px);
+  color:white;
+  background:linear-gradient(to bottom,rgba(0,0,0,.56),transparent);
+  transition:.25s ease;
+}
+.nav.scrolled{background:rgba(6,18,12,.88);backdrop-filter:blur(18px);box-shadow:0 12px 36px rgba(0,0,0,.26)}
+.brand{display:flex;gap:14px;align-items:center;font-weight:900;text-transform:uppercase;letter-spacing:.12em;font-size:12px}
+.brand img{height:36px;width:auto;object-fit:contain}
+.navlinks{display:flex;gap:22px;align-items:center;font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.1em}
+.navlinks a{opacity:.78;transition:.2s}.navlinks a:hover{opacity:1;color:#f0d293}
+.menu-toggle{display:none;background:rgba(255,255,255,.1);color:white;border:1px solid rgba(255,255,255,.22);border-radius:999px;padding:10px 15px;font-weight:800;text-transform:uppercase;letter-spacing:.08em}
+
+.hero{
+  position:relative;min-height:100vh;overflow:hidden;color:white;background:var(--deep);
+  display:flex;flex-direction:column;justify-content:flex-end;
+  padding:110px clamp(20px,5.5vw,92px) 0;
+}
+.hero-bg{position:absolute;inset:0;background-position:center;background-size:cover;transform:scale(1.05)}
+.hero-bg-one{background-image:url('../assets/images/WRN-Drone-1.jpg');animation:kenburns 18s ease-in-out infinite alternate}
+.hero-bg-two{background-image:url('../assets/images/WRN-Drone-10.jpg');opacity:0;animation:heroFade 14s ease-in-out infinite}
+.hero-shade{
+  position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 82% 18%,rgba(217,165,84,.24),transparent 28%),
+    linear-gradient(90deg,rgba(2,8,5,.94),rgba(2,8,5,.62) 42%,rgba(2,8,5,.16)),
+    linear-gradient(to top,rgba(2,8,5,.92),rgba(2,8,5,.22) 52%,rgba(2,8,5,.34));
+}
+@keyframes kenburns{to{transform:scale(1.12) translate3d(-1.5%,1%,0)}}
+@keyframes heroFade{0%,45%{opacity:0}55%,88%{opacity:.55}100%{opacity:0}}
+
+.hero-logos{
+  position:absolute;top:88px;left:clamp(20px,5.5vw,92px);right:clamp(20px,5.5vw,92px);
+  z-index:2;display:flex;align-items:center;gap:28px;
+}
+.hero-logos img{max-height:58px;max-width:240px;object-fit:contain;filter:drop-shadow(0 18px 30px rgba(0,0,0,.45))}
+.hero-logos span{height:46px;width:1px;background:rgba(255,255,255,.34)}
+
+.hero-inner{position:relative;z-index:2;max-width:1180px;margin-top:170px;padding-bottom:42px}
+.kicker,.section-label{
+  margin:0 0 18px;color:#bfe27d;font-size:12px;font-weight:900;letter-spacing:.18em;text-transform:uppercase;
+}
+.dark-kicker{color:#9ab664}
+h1,h2,h3{font-family:"Playfair Display",Georgia,serif;margin:0;line-height:.94}
+h1{font-size:clamp(62px,11vw,156px);letter-spacing:-.07em;text-shadow:0 20px 70px rgba(0,0,0,.5)}
+.hero-subtitle{font-size:clamp(22px,3vw,38px);max-width:980px;margin:18px 0 18px;letter-spacing:.01em;color:rgba(255,255,255,.9)}
+.hero-copy p{font-size:clamp(16px,1.5vw,21px);max-width:760px;color:rgba(255,255,255,.78)}
+.hero-actions{display:flex;gap:14px;flex-wrap:wrap;margin-top:30px}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;border-radius:999px;
+  padding:15px 23px;border:1px solid rgba(255,255,255,.28);
+  font-size:12px;font-weight:900;letter-spacing:.1em;text-transform:uppercase;
+  transition:.22s ease;
+}
+.btn:hover{transform:translateY(-3px)}
+.btn.primary{background:white;color:var(--forest);border-color:white;box-shadow:0 18px 60px rgba(0,0,0,.24)}
+.btn.ghost{background:rgba(255,255,255,.08);color:white;backdrop-filter:blur(12px)}
+
+.stat-bar{
+  position:relative;z-index:3;display:grid;grid-template-columns:repeat(4,1fr);
+  border-top:1px solid rgba(255,255,255,.18);
+  background:linear-gradient(90deg,rgba(12,45,28,.92),rgba(6,18,12,.9));
+  margin:0 calc(clamp(20px,5.5vw,92px) * -1);
+  padding:0 clamp(20px,5.5vw,92px);
+}
+.stat-bar div{padding:26px 24px;border-right:1px solid rgba(255,255,255,.16)}
+.stat-bar div:last-child{border-right:0}
+.stat-bar strong{display:block;font-size:28px;color:white}
+.stat-bar span{display:block;color:rgba(255,255,255,.72);font-weight:800;text-transform:uppercase;font-size:11px;letter-spacing:.1em;margin-top:4px}
+
+section{position:relative;padding:clamp(78px,9vw,138px) clamp(20px,5.5vw,92px)}
+.intro-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:clamp(32px,7vw,100px);align-items:start}
+.intro h2,.property h2,.experience h2,.closing h2{font-size:clamp(42px,6vw,88px);letter-spacing:-.055em;color:var(--forest)}
+.intro-copy p,.property-content p,.experience-copy p,.closing p{font-size:18px;color:var(--soft);max-width:720px}
+
+.image-lockup{padding-top:0;min-height:820px}
+.lockup-main{border-radius:38px;overflow:hidden;box-shadow:var(--shadow);height:660px}
+.lockup-main img{width:100%;height:100%;object-fit:cover}
+.lockup-card{position:absolute;border-radius:30px;overflow:hidden;border:10px solid var(--cream);box-shadow:var(--shadow)}
+.lockup-card img{width:100%;height:100%;object-fit:cover}
+.card-one{right:7vw;bottom:28px;width:35vw;height:330px}
+.card-two{left:8vw;bottom:0;width:28vw;height:280px}
+
+.property{display:grid;grid-template-columns:1fr .9fr;gap:clamp(34px,6vw,88px);align-items:center;background:var(--paper)}
+.property-panel{
+  display:grid;gap:1px;background:var(--dark-line);border:1px solid var(--dark-line);border-radius:32px;overflow:hidden;box-shadow:0 24px 70px rgba(0,0,0,.12)
+}
+.property-panel div{background:white;padding:28px}
+.property-panel span{display:block;color:var(--soft);font-size:12px;font-weight:900;text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px}
+.property-panel strong{font-size:22px;color:var(--forest)}
+
+.cinematic-break{height:90vh;padding:0;overflow:hidden;background:var(--deep)}
+.cinematic-break img{width:100%;height:100%;object-fit:cover;filter:saturate(1.05) contrast(1.03);transform:scale(1.04)}
+.cinematic-break:after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(3,12,7,.88),transparent 58%),linear-gradient(90deg,rgba(3,12,7,.55),transparent)}
+.cinematic-text{position:absolute;z-index:2;left:clamp(20px,5.5vw,92px);bottom:clamp(40px,7vw,90px);max-width:1020px}
+.cinematic-text p{font-family:"Playfair Display",Georgia,serif;font-size:clamp(40px,6.4vw,96px);line-height:.96;letter-spacing:-.055em;color:white;margin:0;text-shadow:0 18px 70px rgba(0,0,0,.5)}
+
+.infrastructure{background:var(--deep);color:white}
+.section-heading{font-size:clamp(42px,6vw,86px);letter-spacing:-.055em;max-width:1080px;color:inherit}
+.asset-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:46px}
+.asset-grid article{
+  min-height:190px;padding:30px;border-radius:28px;
+  background:linear-gradient(145deg,rgba(255,255,255,.09),rgba(255,255,255,.04));
+  border:1px solid rgba(255,255,255,.13);
+  overflow:hidden;position:relative;
+}
+.asset-grid article:after{content:"";position:absolute;right:-40px;bottom:-50px;width:150px;height:150px;background:radial-gradient(circle,rgba(154,182,100,.32),transparent 68%)}
+.asset-grid strong{display:block;font-family:"Playfair Display",Georgia,serif;font-size:44px;line-height:1;color:white}
+.asset-grid span{display:block;color:rgba(255,255,255,.68);font-size:16px;margin-top:12px}
+
+.experience{display:grid;grid-template-columns:.9fr 1.1fr;gap:clamp(34px,6vw,88px);align-items:center}
+.experience-gallery{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.experience-gallery img{height:280px;width:100%;object-fit:cover;border-radius:28px;box-shadow:0 18px 56px rgba(0,0,0,.14)}
+.experience-gallery img:nth-child(2),.experience-gallery img:nth-child(3){transform:translateY(34px)}
+
+.marquee-section{padding:40px 0;background:var(--forest);overflow:hidden}
+.marquee-track{display:flex;gap:18px;width:max-content;animation:marquee 54s linear infinite}
+.marquee-track img{width:380px;height:260px;object-fit:cover;border-radius:24px;box-shadow:0 18px 54px rgba(0,0,0,.28)}
+@keyframes marquee{to{transform:translateX(-50%)}}
+
+.gallery-section{background:var(--paper)}
+.gallery{
+  display:grid;grid-template-columns:repeat(12,1fr);grid-auto-rows:220px;gap:14px;margin-top:46px;
+}
+.gallery button{
+  border:0;padding:0;background:none;cursor:pointer;border-radius:28px;overflow:hidden;box-shadow:0 18px 55px rgba(0,0,0,.12);
+}
+.gallery button:nth-child(1){grid-column:span 7;grid-row:span 2}
+.gallery button:nth-child(2){grid-column:span 5;grid-row:span 2}
+.gallery button:nth-child(3),.gallery button:nth-child(4),.gallery button:nth-child(5){grid-column:span 4}
+.gallery button:nth-child(6){grid-column:span 8;grid-row:span 2}
+.gallery button:nth-child(7){grid-column:span 4;grid-row:span 2}
+.gallery button:nth-child(n+8){grid-column:span 3}
+.gallery img{width:100%;height:100%;object-fit:cover;transition:.55s ease}
+.gallery button:hover img{transform:scale(1.06);filter:saturate(1.08)}
+
+.closing{
+  min-height:86vh;display:grid;place-items:center;text-align:center;color:white;
+  background:linear-gradient(rgba(4,16,9,.78),rgba(4,16,9,.9)),url('../assets/images/WRN-Drone-3.jpg') center/cover no-repeat;
+}
+.closing-card{max-width:980px}
+.closing-logos{display:flex;justify-content:center;align-items:center;gap:28px;flex-wrap:wrap;margin-bottom:36px}
+.closing-logos img{max-height:72px;max-width:280px;object-fit:contain;filter:drop-shadow(0 18px 40px rgba(0,0,0,.45))}
+.closing h2{color:white}
+.closing p{color:rgba(255,255,255,.78);margin:24px auto 34px}
+
+.lightbox{position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:300;display:none;place-items:center;padding:30px}
+.lightbox.open{display:grid}
+.lightbox img{max-height:88vh;max-width:92vw;border-radius:20px;box-shadow:0 30px 100px rgba(0,0,0,.5)}
+.lightbox button{position:absolute;top:22px;right:28px;background:white;color:#111;border:0;border-radius:999px;width:48px;height:48px;font-size:34px;line-height:1;cursor:pointer}
+
+footer{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:34px clamp(20px,5.5vw,92px);background:#030905;color:rgba(255,255,255,.62);font-size:13px}
+
+.reveal{opacity:0;transform:translateY(32px);transition:opacity .8s ease,transform .8s ease}
+.reveal.visible{opacity:1;transform:none}
+
+@media(max-width:900px){
+  .menu-toggle{display:block}
+  .navlinks{position:absolute;top:72px;right:18px;display:none;flex-direction:column;align-items:flex-start;background:rgba(6,18,12,.96);padding:20px;border-radius:20px;border:1px solid rgba(255,255,255,.14)}
+  .navlinks.open{display:flex}
+  .hero-logos{top:86px}.hero-logos img{max-width:150px;max-height:42px}
+  .hero-inner{margin-top:140px}
+  .stat-bar,.intro-grid,.property,.experience,.asset-grid{grid-template-columns:1fr}
+  .stat-bar div{border-right:0;border-bottom:1px solid rgba(255,255,255,.12)}
+  .image-lockup{min-height:auto}.lockup-main{height:420px}.lockup-card{position:relative;inset:auto;width:100%;height:260px;margin-top:16px}
+  .experience-gallery{grid-template-columns:1fr}.experience-gallery img:nth-child(n){transform:none}
+  .gallery{grid-auto-rows:210px}.gallery button:nth-child(n){grid-column:span 12;grid-row:span 1}
+  .cursor-glow{display:none}
+}
